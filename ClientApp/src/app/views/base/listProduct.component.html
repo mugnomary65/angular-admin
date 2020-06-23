@@ -1,0 +1,79 @@
+<app-alert></app-alert> 
+<div class="animated fadeIn" id="exportthis"> 
+   <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Servicios
+        </div>
+        
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <div class="input-group-append">
+                 <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]= "filterPost">              
+                  <button class="btn btn-primary" type="button">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>   
+              </div>                      
+      
+            </div>
+          </div>
+          <div>
+            <button mat-raised-button class="btn btn-primary float-right" style="width:100px" (click)="openCrear()"> Add Service</button>
+          </div>  
+        </div>         
+        <div class="table-responsive">
+        <div class="card-body">
+          <table class="table table-bordered" *ngIf = "servicios && servicios.length">
+            <thead>
+              <tr>
+                <th>Servicio</th>
+                <th>Address</th>
+                <th>Gastos Netos</th>
+                <th>Subtotal</th> 
+                <th>WorForce</th>
+                <th>30%</th>  
+                <th>Precio Total</th>    
+                <th>Ganancias</th>             
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th></th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let servicios of servicios | filerServicios:filterPost | paginate: { itemsPerPage: 10, currentPage: p}">
+              <td id ="idservicio">{{servicios.id}}</td>                
+              <td id="nombre">{{servicios.clientes.address}}</td> 
+              <td >{{servicios.gastosNetos}}</td>  
+              <td id="subtotal">{{servicios.subtotal}}</td>  
+              <td id="manobra">{{servicios.manobra}}</td>  
+              <td id="tiosan">{{servicios.tiosan}}</td>         
+              <td id="totales">{{servicios.total}}</td>
+              <td >{{servicios.ganancias}}</td>    
+              <td >{{servicios.estados.nombre}}</td>  
+              <td id="date">{{servicios.date |date}}</td>
+              <td style="display:none;" id ="addrees">{{servicios.clientes.address}}</td>
+              <td style="display:none;" id ="telefono">{{servicios.clientes.telefono}}</td>
+              <td style="display:none;" id ="zipCode">{{servicios.clientes.zipCode}}</td>
+              <td style="display:none;" id ="email">{{servicios.clientes.email}}</td>
+           
+            
+                                   
+              <td>
+                <button class="btn btn-success" (click)="deleteServicio(servicios)" > Delete</button>
+                <button class="btn btn-danger" (click)="openEdit(servicios.id)"> Edit</button>
+                <button class="btn btn-info active" (click)="openPDF(servicios)"> Imprimir</button>
+                <a href="https://www.johnstonesupply.com/storefront/index.ep" class="btn btn-success"> Shop</a>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>

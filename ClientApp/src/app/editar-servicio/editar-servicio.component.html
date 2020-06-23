@@ -1,0 +1,158 @@
+<div class="modal-dialog" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title" id="exampleModalLabel"> <h2>Agregar servicio</h2> </div>
+          <button type="button" class="close" aria-label="Close" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">                 
+          <form [formGroup] = "miFormulario1">
+            <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Cliente</span>
+                  </div>                  
+                  <div class="input-group-append ">                      
+                    <select class="form-control" [class.is-invalid]="touchedAndInvalid('clienteId')" id="clienteId" name="clienteId" formControlName="clienteId" aria-placeholder="--Seleccione un cliente--">
+                  <option *ngFor="let objeto of clientes |async"  ([ngValue])="'client'">{{objeto.nombre}}</option>
+                      </select>
+                    <div *ngIf="touchedAndInvalid('clienteId')" class="input-errors">
+                      <div *ngIf="miFormulario1.get('clienteId').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                  </div>              
+            </div>         
+           </div>               
+              </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Id</span>
+                </div>
+                <div class="input-group-append">
+                <input [class.is-invalid]="touchedAndInvalid('idServicio')" type="text" id="idServicio" formControlName="idServicio" class="form-control" required>
+              
+                </div>                   
+              </div>
+              <div *ngIf="touchedAndInvalid('idServicio')" class="input-errors">
+                <div *ngIf="miFormulario1.get('idServicio').errors.required"><p class="text-danger">Campo requerido.</p></div>
+            </div>
+            </div>
+            
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Descripcion</span>
+                </div>
+                <div class="input-group-append">
+                <input  [class.is-invalid]="touchedAndInvalid('descripcion')" type="descripcion" id="descripcion" formControlName="descripcion" class="form-control">
+                <button type="submit" class="btn btn-sm btn-primary">+</button>
+                </div>
+              </div>
+              <div *ngIf="touchedAndInvalid('descripcion')" class="input-errors">
+                <div *ngIf="miFormulario1.get('descripcion').errors.required"><p class="text-danger">Campo requerido.</p></div>
+              </div>
+            </div>
+           <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Precio</span>
+                  </div>
+                  <div class="input-group-append">
+                  <input [class.is-invalid]="touchedAndInvalid('precio')"  type="number" id="precio" formControlName="precio" class="form-control">
+                 </div>                      
+                </div>
+                <div *ngIf="touchedAndInvalid('precio')" class="input-errors">
+                    <div *ngIf="miFormulario1.get('precio').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Impuesto</span>
+                  </div>
+                  <div class="input-group-append">
+                  <input [class.is-invalid]="touchedAndInvalid('impuesto')"  type="number" id="impuesto" formControlName="impuesto" class="form-control">
+               
+                  </div>                 
+                   <div *ngIf="touchedAndInvalid('impuesto')" class="input-errors">
+                   <div *ngIf="miFormulario1.get('impuesto').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                </div>
+            </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Total</span>
+                  </div>
+                  <div class="input-group-append">
+                  <input [class.is-invalid]="touchedAndInvalid('total')" type="number" id="total" formControlName="total" class="form-control">
+                  
+                  
+                  </div>
+                 
+                </div>
+                <div *ngIf="touchedAndInvalid('total')" class="input-errors">
+                    <div *ngIf="miFormulario1.get('total').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Date</span>
+                  </div>
+                  <div class="input-group-append">
+                  <input [class.is-invalid]="touchedAndInvalid('date')" type="date" id="date" formControlName="date" class="form-control">
+                  </div>
+              </div>
+              <div *ngIf="touchedAndInvalid('date')" class="input-errors">
+                    <div *ngIf="miFormulario1.get('date').errors.required" >
+                        <p class="text-danger">Campo requerido.</p>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Estado</span>
+                  </div>
+                  <div class="input-group-append">                      
+                    <select class="form-control" [class.is-invalid]="touchedAndInvalid('estadoId')" id="estadoId"  name="estadoId" formControlName="estadoId" >
+                      <option [ngValue]="'estado'"></option>
+                      <option *ngFor="let objeto of estados |async">{{objeto.nombre}}</option>
+                    </select>
+                    <div *ngIf="touchedAndInvalid('estadoId')" class="input-errors">
+                      <div *ngIf="miFormulario1.get('estadoId').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                  </div>
+                    </div>
+                    
+                </div>
+               
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Nota</span>
+                  </div>
+                  <div class="input-group-append">                      
+                    <textarea class="form-control" [class.is-invalid]="touchedAndInvalid('nota')"  id="nota" name="nota" formControlName="nota" >
+                  </textarea>
+                    </div>
+                    <div *ngIf="touchedAndInvalid('nota')" class="input-errors">
+                      <div *ngIf="miFormulario1.get('nota').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                  </div>
+                 
+                </div>
+               
+              </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-sm btn-primary" (click)="save()">Submit</button>
+            </div>
+                        
+          </form>
+    
+        </div>
+      </div>
+    </div>
+    
+
+

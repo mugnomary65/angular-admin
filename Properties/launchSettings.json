@@ -1,0 +1,29 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:28625",
+      "sslPort": 44341
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "Llave_super_secreta": "c2Hqb9geOCwJm8MMg9uP",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "angular_admin": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "Llave_super_secreta": "c2Hqb9geOCwJm8MMg9uP",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

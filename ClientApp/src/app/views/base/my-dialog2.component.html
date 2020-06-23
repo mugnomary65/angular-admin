@@ -1,0 +1,245 @@
+<div class="animated fadeIn">
+  <app-alert></app-alert>
+  <div class="w3-row-padding">
+    <div class="col-sm-12"
+    background-color = "0480be">
+    <div class="card">
+      <!--<h4 class="modal-title w-100 font-weight-bold">Registro</h4>-->
+      <div class="card-header">
+      <h3>{{modoEdicion ? 'Editar' : 'Agregar'}} servicios</h3>
+      </div>
+      <div class="card-body"> 
+          
+        <form [formGroup] = "miFormulario1" (ngSubmit)="save()">
+          <div class= "row">
+          <div class="form-group">
+              <div class="input-group col">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Cliente</span>
+                </div>
+                <div class="input-group-append ">                      
+                  <select class="form-control " [class.is-invalid]="touchedAndInvalid('clienteId')" id="nombre" name="clienteId" formControlName="clienteId" aria-placeholder="--Seleccione un cliente--">
+                  <option *ngFor="let objeto of clientes |async" [ngValue]= "objeto.clienteId">{{objeto.nombre}}</option>
+                  </select>   
+                  <div *ngIf="touchedAndInvalid('clienteId')" class="input-errors">
+                    <div *ngIf="miFormulario1.get('clienteId').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                </div>              
+         </div>                
+       </div>
+       </div>
+       <div class="form-group">
+        <div class="input-group col">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Date</span>
+          </div>
+          <div class="input-group-append">
+          <input [class.is-invalid]="touchedAndInvalid('date')" type="date" id="date" formControlName="date" class="form-control">
+       
+          </div>
+           <div *ngIf="touchedAndInvalid('date')" class="input-errors">
+            <div *ngIf="miFormulario1.get('date').errors.required" >
+                <p class="text-danger">Campo requerido.</p>
+            </div>
+        </div>
+       
+       
+        </div>
+      
+      </div>
+          <div class="form-group">
+            <div class="input-group col">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Id</span>
+              </div>
+              <div class="input-group-append">
+              <input [class.is-invalid]="touchedAndInvalid('idServicio')" type="text" id="idServicio" formControlName="idServicio" class="form-control" required>
+              </div>   
+              <div *ngIf="touchedAndInvalid('idServicio')" class="input-errors">
+                <div *ngIf="miFormulario1.get('idServicio').errors.required"><p class="text-danger">Campo requerido.</p></div>
+            </div>               
+            </div>
+           
+          </div> 
+          <div class="form-group">
+            <div class="input-group col">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Estado</span>
+              </div>
+              <div class="input-group-append">                      
+                <select class="form-control" [class.is-invalid]="touchedAndInvalid('estadoId')" id="estadoId"  name="estadoId" formControlName="estadoId" >
+                  <option *ngFor="let objeto of estados |async" [ngValue]= "objeto.estadoId">{{objeto.nombre}}</option>
+                </select>
+                </div>
+                <div *ngIf="touchedAndInvalid('estadoId')" class="input-errors">
+                  <div *ngIf="miFormulario1.get('estadoId').errors.required"><p class="text-danger">Campo requerido.</p></div>
+              </div>
+            </div>
+           
+          </div>    
+          <div class="form-group">
+            <div class="input-group col">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Observaciones</span>
+              </div>
+              <div class="input-group-append">                      
+                <textarea class="form-control" [class.is-invalid]="touchedAndInvalid('nota')"  id="nota" name="nota" formControlName="nota" >
+              </textarea>
+                </div>
+                <div *ngIf="touchedAndInvalid('nota')" class="input-errors">
+                  <div *ngIf="miFormulario1.get('nota').errors.required"><p class="text-danger">Campo requerido.</p></div>
+              </div>
+             
+            </div>
+           
+          </div>
+        </div>
+          <div formArrayName= "descripcions">
+            <div class="card w-150">
+              <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Descripcion</h3>
+              <div class="card-body">
+                <div id="table" class="table-editable">
+                  <span class="table-add float-right mb-3 mr-2">
+                    <a class="btn btn-block btn-success active" (click)="agregarDescripcion()">Add</a>
+                  </span>
+                  
+                  <table class="table table-bordered table-responsive-lg table-striped text-center">
+                    <thead>
+                      <tr>
+                        <th class="text-center">Cant</th>
+                        <th class="text-center">Descripcion</th>
+                        <th class="text-center">Precio</th>    
+                        <th class="text-center">Total</th>                      
+                        <th class="text-center">Remove</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let descripcions of descriptionForm.controls; let i=index" [formGroupName]= "i">
+                       <td >
+                        <input type= "number" [attr.id]="'cantidad'+ i" formControlName="cantidad"  (change)="changeValue(i,$event)">                      
+                        
+                      </td> 
+                    
+                       <td>
+                        <input  type="text" formControlName="texto" [attr.id]="'texto'+ i"  (change)="changeValue(i,$event)">  
+                                    
+                       </td> 
+                       <td>
+                        <input type= "number"  formControlName="precio" id= "precio" [attr.id]="'precio'+ i"  (change)="changeValue(i,$event)">       
+                       
+                       </td>
+                       <td>
+                        <input type= "number" formControlName="total"  [attr.id]="'total'+ i" value={{precioTotal(i)}}  >   
+                     
+                        </td>
+                                         
+                      <td>
+                          <span class="table-remove"><button type="button"
+                              class="btn btn-danger btn-rounded btn-sm my-0" (click)="removerDescripcion(i)">Remove</button></span>
+                        </td>
+                      </tr>                    
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- Editable table -->
+          </div>  
+          <div class= "row">        
+            <div class="form-group">
+              <div class="input-group col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">TotalNeto</span>
+                </div>
+                <div class="input-group-append">
+                  <input class="form-control" type="number" formControlName="gastosNetos" id="gastosNetos" value={{totalNeto()}}>
+                </div>             
+              </div>             
+            </div> 
+          </div>
+          <div class="form-group">
+            <div class="input-group col">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" >Tax</span>
+              </div>
+              <div class="input-group-append">
+              <input class="form-control" type="number" formControlName="seisporciento" id="seisporciento" value={{seisPorCiento()}}>
+              </div>             
+            </div>             
+          </div> 
+        </div>
+        <div class="form-group">
+          <div class="input-group col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" class="form-control">SubTotal</span>
+            </div>
+            <div class="input-group-append">
+            <input class="form-control" type="number"  formControlName="subtotal" id="subtotal" value={{subTotal()}} >
+            </div>             
+          </div>             
+        </div> 
+      </div>
+          <div class="form-group">
+            <div class="input-group col">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Work Force</span>
+              </div>
+              <div class="input-group-append">
+              <input type="number" id="manobra" formControlName="manobra" class="form-control">
+              </div>             
+            </div>             
+          </div> 
+        </div>
+        <div class="form-group">
+          <div class="input-group col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">30%</span>
+            </div>
+            <div class="input-group-append">
+            <input class="form-control" type="number" formControlName="tiosan" value={{tioSan()}}>
+            </div>             
+          </div>             
+        </div> 
+      </div>   
+                     
+            <div class="form-group">
+              <div class="input-group col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Total</span>
+                </div>
+                <div class="input-group-append">
+                <input class="form-control" formControlName="total"  type="number" value={{totalComplto()}}>
+                </div>             
+              </div>              
+            </div>  
+          </div>    
+          <div class="form-group">
+            <div class="input-group col">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Ganancias</span>
+              </div>
+              <div class="input-group-append">
+              <input class="form-control" type="number" formControlName="ganancias" value={{gananciasTotal()}}>
+              </div>             
+            </div>             
+          </div> 
+        </div>  
+        </div>         
+            <span class="float-right mb-3 mr-2">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            <button (click)="existenCambiosPendientes()"  class="btn btn-danger">Cancelar</button>
+            </span>
+        </form>
+      </div>     
+    </div>   
+  </div>
+      </div>
+    </div>
+
+

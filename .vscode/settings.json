@@ -1,0 +1,4 @@
+{
+    "appService.deploySubpath": "obj\\Release",
+    "appService.defaultWebAppToDeploy": "None"
+}

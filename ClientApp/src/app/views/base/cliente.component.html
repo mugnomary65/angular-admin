@@ -1,0 +1,112 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-7">
+          <div class="card">
+            <div class="card-header">
+              <h3>{{modoEdicion ? 'Editar' : 'Agregar'}} clientes</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup] = "miFormulario" (ngSubmit)="save()" >
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Name</span>
+                    </div>
+                    <input [class.is-invalid]="touchedAndInvalid('nombre')" type="text" id="nombre" formControlName="nombre" class="form-control" required>
+                    <div class="input-group-append">
+                      <span class="input-group-text"><i class="fa fa-user"></i></span>
+                    </div>                   
+                  </div>
+                  <div *ngIf="touchedAndInvalid('nombre')" class="input-errors">
+                    <div *ngIf="miFormulario.get('nombre').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Email</span>
+                    </div>
+                    <input  [class.is-invalid]="touchedAndInvalid('email')" type="email" id="email3" formControlName="email" class="form-control" autocomplete="email">
+                    <div class="input-group-append">
+                      <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                    </div>
+                  </div>
+                  <div *ngIf="touchedAndInvalid('email')" class="input-errors">
+                    <div *ngIf="miFormulario.get('email').errors.email"> <p class="text-danger">Email invalido.</p></div>
+                </div>
+                </div>
+               <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Telefono</span>
+                      </div>
+                      <input [class.is-invalid]="touchedAndInvalid('telefono')" type="text" id="telefono" formControlName="telefono" class="form-control">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="icon-phone icons"></i></span>
+                      </div>                      
+                    </div>
+                    <div *ngIf="touchedAndInvalid('telefono')" class="input-errors">
+                        <div *ngIf="miFormulario.get('telefono').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Address</span>
+                      </div>
+                      <input [class.is-invalid]="touchedAndInvalid('address')"  type="text" id="address" formControlName="address" class="form-control">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-address-card-o"></i></span>
+                      </div>
+                     
+                    </div>
+                    <div *ngIf="touchedAndInvalid('address')" class="input-errors">
+                        <div *ngIf="miFormulario.get('address').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">ZipCode</span>
+                      </div>
+                      <input [class.is-invalid]="touchedAndInvalid('zipCode')" type="text" id="zipCode" formControlName="zipCode" class="form-control">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="icon-location-pin icons"></i></span>
+                      </div>
+                     
+                    </div>
+                    <div *ngIf="touchedAndInvalid('zipCode')" class="input-errors">
+                        <div *ngIf="miFormulario.get('zipCode').errors.required"><p class="text-danger">Campo requerido.</p></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Date</span>
+                      </div>
+                      <input [class.is-invalid]="touchedAndInvalid('date')" type="date" id="date" formControlName="date" class="form-control">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="cui-calendar icons"></i></span>
+                      </div>
+                     
+                    </div>
+                    <div *ngIf="touchedAndInvalid('date')" class="input-errors">
+                        <div *ngIf="miFormulario.get('date').errors.required" >
+                            <p class="text-danger">Campo requerido.</p>
+                        </div>
+                    </div>
+                  </div>
+                <span class="float-right mb-3 mr-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button (click)="existenCambiosPendientes()"  class="btn btn-danger">Cancelar</button>
+                </span>
+                            
+              </form>
+            </div>
+          </div>
+        </div>
+        
+           
+     </div>
+    
+</div>

@@ -1,0 +1,66 @@
+
+<div class="animated fadeIn">
+  <app-alert></app-alert>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Clientes
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div class="input-group-append">
+               <input type="text" class="form-control"  name="filterPost" placeholder="name, email, telefono,address, zipCode" [(ngModel)]="filterPost">              
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>   
+            </div>                      
+    
+          </div>
+        </div>
+          
+      <div class="col-lg-12">
+       <button mat-raised-button (click)="openDialog()" data-target="#myupdate" class="btn btn-primary float-right" style="width:100px" > Add Cliente</button>
+    </div>
+      <div class="card-body">
+        <p *ngIf = "!(clientes && clientes.length)">
+          No existen registros que mostrar
+          </p>
+          <div class="table-responsive">
+        <table class="table table-bordered" *ngIf = "clientes && clientes.length">
+          <thead>
+            <tr>
+              
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Telefono</th>
+              <th>Direccion</th>
+              <th>ZipCode</th>
+              <th>Fecha</th>
+              <th></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor = "let clientes of clientes |filtrar:filterPost | paginate: { itemsPerPage: 10, currentPage: p }">
+              <td>{{clientes.nombre}}</td>
+              <td>{{clientes.email}}</td>
+              <td>{{clientes.telefono}}</td>
+              <td>{{clientes.address}}</td>
+              <td>{{clientes.zipCode}}</td>
+              <td>{{clientes.date |date}}</td>
+            
+              <td><button class="btn btn-success" (click)="deleteCliente(clientes)"> Delete</button>
+                <button class="btn btn-danger" (click)="openEdit(clientes.clienteId)"> Edit</button></td>
+            </tr>
+           
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
