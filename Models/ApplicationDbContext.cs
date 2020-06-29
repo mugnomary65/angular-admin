@@ -16,12 +16,12 @@ namespace angular_admin.Models
             
         }
         public DbSet<Cliente> Clientes {get; set;}
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+      /*  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         
      optionsBuilder.UseSqlServer("Server=admin-angular;Database=LLC;Trusted_Connection=True;");
         
-    }
+    }*/
    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            
