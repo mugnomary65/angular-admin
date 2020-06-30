@@ -22,7 +22,7 @@ import { AccountService } from './account/account.service';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
