@@ -16,12 +16,12 @@ namespace angular_admin.Models
             
         }
         public DbSet<Cliente> Clientes {get; set;}
-      /*  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         
-     optionsBuilder.UseSqlServer("Server=admin-angular;Database=LLC;Trusted_Connection=True;");
-        
-    }*/
+     optionsBuilder.UseSqlServer("Data Source=tcp:admin-vidaldbserver.database.windows.net,1433;Initial Catalog=admin-vidal_db;User Id=admin-vidal@admin-vidaldbserver;Password=Liveg0.c0m");
+      
+    }
    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            
