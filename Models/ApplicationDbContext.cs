@@ -19,8 +19,9 @@ namespace angular_admin.Models
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         
-     optionsBuilder.UseSqlServer("Data Source=tcp:admin-vidaldbserver.database.windows.net,1433;Initial Catalog=admin-vidal_db;User Id=admin-vidal@admin-vidaldbserver;Password=Liveg0.c0m");
-      
+     optionsBuilder.UseSqlServer("Server=tcp:admin-vidaldbserver.database.windows.net,1433;Initial Catalog=angular-admin20200629203934_db;Persist Security Info=False;User ID=admin-vidal;Password=Liveg0.c0m;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+
     }
    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
