@@ -93,8 +93,8 @@ namespace angular_admin.Controllers
             var expiration = DateTime.UtcNow.AddDays(7);
 
             JwtSecurityToken token = new JwtSecurityToken(
-               issuer: "https://localhost:5001/",
-               audience: "https://localhost:5001/",
+               issuer: "https://admin-vidal.azurewebsites.net/",
+               audience: "https://admin-vidal.azurewebsites.net/",
                claims: claims,
                expires: expiration,
                signingCredentials: creds);

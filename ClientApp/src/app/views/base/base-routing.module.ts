@@ -33,7 +33,7 @@ const routes: Routes = [
     data: {
       title: 'Base'
     },
-    canActivate: [AuthGuardService],
+  //  canActivate: [AuthGuardService],
     children: [
    
       {

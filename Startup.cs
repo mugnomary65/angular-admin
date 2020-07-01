@@ -43,8 +43,8 @@ namespace angular_admin
                      ValidateAudience = true,
                      ValidateLifetime = true,
                      ValidateIssuerSigningKey = true,
-                     ValidIssuer = "https://localhost:5001/",
-                     ValidAudience = "https://localhost:5001/",
+                    ValidIssuer = "https://admin-vidal.azurewebsites.net/",
+                     ValidAudience = "https://admin-vidal.azurewebsites.net/",
                      IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(Configuration["Llave_super_secreta"])),
                      ClockSkew = TimeSpan.Zero
@@ -95,7 +95,7 @@ namespace angular_admin
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-
+          
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -105,15 +105,14 @@ namespace angular_admin
 
                 if (env.IsDevelopment())
                 {
-                    app.UseDeveloperExceptionPage();
+                 
                     spa.UseAngularCliServer(npmScript:"start");
-                   spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
-                }
-                 app.UseCors();
+                  
+                }          
  
   
             });
-         /*   app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());*/
+           
         }
     }
 }

@@ -73,14 +73,14 @@ export const routes: Routes = [
     children: [
       {
         path: 'base',
-        canActivate: [AuthGuardService],
+        //canActivate: [AuthGuardService],
         
         
         loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },
       {
         path: 'dashboard',
-        canActivate: [AuthGuardService],
+       // canActivate: [AuthGuardService],
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       

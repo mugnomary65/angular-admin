@@ -13,7 +13,7 @@ namespace angular_admin.Controllers
 {
      [Produces("application/json")]
      [Route("api/[controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+  //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
    
     
     [ApiController]

@@ -19,7 +19,7 @@
     "angular_admin": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "applicationUrl": "https://admin-vidal.azurewebsites.net/",
       "environmentVariables": {
         "Llave_super_secreta": "c2Hqb9geOCwJm8MMg9uP",
         "ASPNETCORE_ENVIRONMENT": "Development"
