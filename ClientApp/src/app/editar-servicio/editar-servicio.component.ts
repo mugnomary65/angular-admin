@@ -85,7 +85,7 @@ export class EditarServicioComponent implements OnInit {
     var dp = new DatePipe(navigator.language);
     var format= "yyyy-MM-dd";
     this.miFormulario1.patchValue({
-      id: servicio.id,
+      servicioId: servicio.id,
       idServicio: servicio.idServicio,
       descripcion: servicio.descripcions,    
       total: servicio.total,

@@ -19,7 +19,7 @@ namespace angular_admin.Models
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         
-     optionsBuilder.UseSqlServer(@"Server=tcp:admin-vidaldbserver.database.windows.net,1433;Initial Catalog=admin-vidal_db;Persist Security Info=False;User ID=admin-vidal;Password=Liveg0.c0m;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+     optionsBuilder.UseSqlServer("Server=DESKTOP-4SGBNKK;Database=LLC;Trusted_Connection=True;");
 
 
     }
@@ -27,7 +27,8 @@ namespace angular_admin.Models
         {
            
           modelBuilder.Entity<Cliente>().ToTable("Clientes");
-            modelBuilder.Entity<Servicio>().ToTable("Servicios");
+            modelBuilder.Entity<Servicio>().HasMany( x => x.Descripcions).WithOne().OnDelete(DeleteBehavior.Cascade);
+           
             modelBuilder.Entity<Estado>().ToTable("Estados");
               modelBuilder.Entity<Descripcion>().ToTable("Descripcion");
                base.OnModelCreating(modelBuilder);

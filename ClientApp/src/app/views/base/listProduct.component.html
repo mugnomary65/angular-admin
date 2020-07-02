@@ -1,5 +1,6 @@
-<app-alert></app-alert> 
+
 <div class="animated fadeIn" id="exportthis"> 
+  <app-alert></app-alert> 
    <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
@@ -7,7 +8,7 @@
         </div>
         
         <div class="card-body">
-          <div class="row">
+            <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
                 <div class="input-group-append">
@@ -15,17 +16,20 @@
                   <button class="btn btn-primary" type="button">
                     <i class="fa fa-search"></i>
                   </button>
-                </div>   
-              </div>                      
+                </div>                                   
       
             </div>
           </div>
-          <div>
+          <div class="col-lg-12">
             <button mat-raised-button class="btn btn-primary float-right" style="width:100px" (click)="openCrear()"> Add Service</button>
           </div>  
-        </div>         
+        </div>    
+        <div class="card-body">  
+          <p *ngIf = "!(servicios && servicios.length)">
+            No existen registros que mostrar
+            </p>   
         <div class="table-responsive">
-        <div class="card-body">
+          
           <table class="table table-bordered" *ngIf = "servicios && servicios.length">
             <thead>
               <tr>
@@ -53,7 +57,7 @@
               <td id="tiosan">{{servicios.tiosan}}</td>         
               <td id="totales">{{servicios.total}}</td>
               <td >{{servicios.ganancias}}</td>    
-              <td >{{servicios.estados.nombre}}</td>  
+              <td id="estado">{{servicios.estados.nombre}}</td>  
               <td id="date">{{servicios.date |date}}</td>
               <td style="display:none;" id ="addrees">{{servicios.clientes.address}}</td>
               <td style="display:none;" id ="telefono">{{servicios.clientes.telefono}}</td>
@@ -75,5 +79,6 @@
         </div>
       </div>
     </div>
-  </div>
     </div>
+  </div>
+   

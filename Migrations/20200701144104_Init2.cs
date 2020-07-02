@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace angular_admin.Migrations
 {
-    public partial class Init : Migration
+    public partial class Init2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -187,7 +187,7 @@ namespace angular_admin.Migrations
                 name: "Servicios",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    ServicioId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdServicio = table.Column<string>(nullable: true),
                     Total = table.Column<double>(nullable: false),
@@ -200,11 +200,12 @@ namespace angular_admin.Migrations
                     Ganancias = table.Column<double>(nullable: false),
                     Nota = table.Column<string>(nullable: true),
                     ClienteID = table.Column<int>(nullable: false),
-                    EstadoId = table.Column<int>(nullable: false)
+                    EstadoId = table.Column<int>(nullable: false),
+                    DescripcionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Servicios", x => x.Id);
+                    table.PrimaryKey("PK_Servicios", x => x.ServicioId);
                     table.ForeignKey(
                         name: "FK_Servicios_Clientes_ClienteID",
                         column: x => x.ClienteID,
@@ -238,7 +239,7 @@ namespace angular_admin.Migrations
                         name: "FK_Descripcion_Servicios_ServicioId1",
                         column: x => x.ServicioId1,
                         principalTable: "Servicios",
-                        principalColumn: "Id",
+                        principalColumn: "ServicioId",
                         onDelete: ReferentialAction.Restrict);
                 });
 

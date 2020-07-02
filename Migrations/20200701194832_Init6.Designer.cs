@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using angular_admin.Models;
 
 namespace angular_admin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200701194832_Init6")]
+    partial class Init6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,7 +336,8 @@ namespace angular_admin.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteID");
+                    b.HasIndex("ClienteID")
+                        .IsUnique();
 
                     b.HasIndex("EstadoId");
 
@@ -403,8 +406,8 @@ namespace angular_admin.Migrations
             modelBuilder.Entity("angular_admin.Models.Servicio", b =>
                 {
                     b.HasOne("angular_admin.Models.Cliente", "Clientes")
-                        .WithMany()
-                        .HasForeignKey("ClienteID")
+                        .WithOne()
+                        .HasForeignKey("angular_admin.Models.Servicio", "ClienteID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

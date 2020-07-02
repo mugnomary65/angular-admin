@@ -1,17 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ActivatedRouteSnapshot } from '@angular/router';
 
-import { CardsComponent } from './cards.component';
-import { FormsComponent } from './forms.component';
-import { SwitchesComponent } from './switches.component';
-import { TablesComponent } from './tables.component';
-import { TabsComponent } from './tabs.component';
-import { CarouselsComponent } from './carousels.component';
-import { CollapsesComponent } from './collapses.component';
-import { PaginationsComponent } from './paginations.component';
-import { PopoversComponent } from './popovers.component';
-import { ProgressComponent } from './progress.component';
-import { TooltipsComponent } from './tooltips.component';
+
 import { NavbarsComponent } from './navbars/navbars.component';
 import {ClienteComponent } from './cliente.component';
 import {listclientesComponent } from './listclientes.component';
@@ -28,13 +18,13 @@ import { LogInterceptorService } from 'app/services/log-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
 const routes: Routes = [
-  {
-    path: '',
+  
+  /*  path: '',
     data: {
       title: 'Base'
     },
   //  canActivate: [AuthGuardService],
-    children: [
+    children: [*/
    
       {
         path: '',
@@ -50,7 +40,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'crearservicio/:id',
+        path: 'editarservicio/:id',
         component: MyDialog2Component,
       
       },
@@ -64,12 +54,12 @@ const routes: Routes = [
         }
       },
       {
-        path: 'crearcliente/:id',
+        path: 'editarcliente/:id',
         component: ClienteComponent,
       
       },
       {
-        path: 'listclientes',
+        path: 'listclients',
         
         component: listclientesComponent,
        
@@ -79,7 +69,7 @@ const routes: Routes = [
       },
       
       {
-        path: 'listProduct',
+        path: 'listservices',
         
         component: listProductComponent,
        
@@ -87,28 +77,12 @@ const routes: Routes = [
           title: 'Servicio'
         }
       },
-     
-      {
-        path: 'paginations',
-        component: PaginationsComponent,
-        data: {
-          title: 'Pagination'
-        }
-      },
-  
-      {
-        path: 'navbars',
-        component: NavbarsComponent,
-        data: {
-          title: 'Navbars'
-        }
-      }, 
-      
+         
    
-    ]
+  //  ]
     
-  }
-];
+  
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MyDialogComponent } from 'app/my-dialog/my-dialog.component';
 import { ICliente } from './cliente';
 import { ClienteService } from 'app/views/base/cliente.service';
 
@@ -9,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EditarClienteComponent } from 'app/editar-cliente/editar-cliente.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IconsModule } from '../icons/icons.module';
+import { ServiceService } from 'app/service.service';
 @Component({
  
   templateUrl: './listclientes.component.html',
@@ -21,9 +21,12 @@ export class listclientesComponent implements OnInit
   clientes: ICliente[];
   clienteId: number;
   p: number = 1;
+  servicios;
+  url;
   
   constructor( private dialog: MatDialog, private clientesService: ClienteService ,
     private activatedRoute: ActivatedRoute,
+    private serviceService: ServiceService,
     private router: Router ) { }
   openDialog(){
     this.router.navigate(["/base/crearcliente"]);
@@ -36,7 +39,7 @@ export class listclientesComponent implements OnInit
   }
   openEdit(id: number)
   {    
-      this.router.navigate(["/base/crearcliente/" + id]);
+      this.router.navigate(["/base/editarcliente/" + id]);
   }
 
   getClientes():void{
@@ -44,7 +47,8 @@ export class listclientesComponent implements OnInit
     .subscribe(clientesData =>this.clientes = clientesData);
   }
   deleteCliente(cliente: ICliente): void {
-      this.clientesService.delete(cliente.clienteId)  
+     
+    this.clientesService.delete(cliente.clienteId)  
       .subscribe(data => {  
         this.clientes = this.clientes.filter(u => u !== cliente);  
       })

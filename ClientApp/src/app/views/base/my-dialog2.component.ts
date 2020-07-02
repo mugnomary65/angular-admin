@@ -95,7 +95,7 @@ export class MyDialog2Component implements OnInit {
   
       this.serviceServic.getServi(this.servicioId.toString())
             .subscribe(servicios => this.cargarFormulario(servicios),
-          error => this.router.navigate(["/base/listProduct"]));
+          error => this.router.navigate(["/base/listservices"]));
      
     this.preciototal = (parseInt("0")); 
     
@@ -127,8 +127,8 @@ export class MyDialog2Component implements OnInit {
      var dp = new DatePipe(navigator.language);
      var format= "yyyy-MM-dd";
      this.miFormulario1.patchValue({
-       id: servicio.id,
-       idServicio: servicio.idServicio,      
+      id: servicio.id,
+       idServicio: servicio.idServicio,        
        total: servicio.total,
        date: dp.transform(servicio.date, format),
        nota: servicio.nota,
@@ -152,7 +152,7 @@ export class MyDialog2Component implements OnInit {
    }
 
    existenCambiosPendientes(): void {
-    this.router.navigate(["/base/listProduct"]);
+    this.router.navigate(["/base/listservices"]);
   }
 
  save() {
@@ -187,7 +187,7 @@ export class MyDialog2Component implements OnInit {
     
   }
   onSaveSuccess(){
-      this.router.navigate(["/base/listProduct"]);
+      this.router.navigate(["/base/listservices"]);
       
    
   

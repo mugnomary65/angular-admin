@@ -43,8 +43,8 @@ namespace angular_admin
                      ValidateAudience = true,
                      ValidateLifetime = true,
                      ValidateIssuerSigningKey = true,
-                    ValidIssuer = "https://admin-vidal.azurewebsites.net/",
-                     ValidAudience = "https://admin-vidal.azurewebsites.net/",
+                    ValidIssuer = "https://localhost:5001",
+                     ValidAudience = "https://localhost:5001",
                      IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(Configuration["Llave_super_secreta"])),
                      ClockSkew = TimeSpan.Zero

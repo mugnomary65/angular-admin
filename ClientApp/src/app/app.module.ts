@@ -16,8 +16,7 @@ import { AppComponent } from './app.component';
 // Import containers
 import { DefaultLayoutComponent } from './containers';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
+
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
@@ -45,7 +44,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDialogModule} from '@angular/material/dialog';
-import { MyDialogComponent } from './my-dialog/my-dialog.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClienteService } from './views/base/cliente.service';
@@ -99,18 +98,17 @@ PdfMakeWrapper.setFonts(pdfFonts);
     HttpClientModule,
     Ng2SearchPipeModule,
     NgxChartsModule,
+    
 
        
 
     ],
   declarations: [
     AppComponent,
-    ...APP_CONTAINERS,
-    P404Component,
-    P500Component,
+    ...APP_CONTAINERS,  
     LoginComponent,
     RegisterComponent,
-    MyDialogComponent,  
+  
     EditarClienteComponent,
     EditarServicioComponent,
 
@@ -120,7 +118,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
 
   ],
   
-  entryComponents:[MyDialogComponent,EditarClienteComponent, EditarServicioComponent],
+  entryComponents:[EditarClienteComponent, EditarServicioComponent],
   
   providers: [
     ClienteService,

@@ -10,8 +10,8 @@ using angular_admin.Models;
 namespace angular_admin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200630192518_Init")]
-    partial class Init
+    [Migration("20200701214429_Init63")]
+    partial class Init63
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -340,7 +340,7 @@ namespace angular_admin.Migrations
 
                     b.HasIndex("EstadoId");
 
-                    b.ToTable("Servicios");
+                    b.ToTable("Servicio");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -398,7 +398,8 @@ namespace angular_admin.Migrations
                 {
                     b.HasOne("angular_admin.Models.Servicio", null)
                         .WithMany("Descripcions")
-                        .HasForeignKey("ServicioId1");
+                        .HasForeignKey("ServicioId1")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("angular_admin.Models.Servicio", b =>

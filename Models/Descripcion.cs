@@ -11,8 +11,9 @@ namespace angular_admin.Models
          public string Texto {get; set;}  
          public double Precio {get; set;}
           public double Total {get; set;}       
-      
+        
           private int ServicioId {get; set;}
+        
          
     }
 }

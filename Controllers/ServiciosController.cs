@@ -125,12 +125,32 @@ namespace angular_admin.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Servicio>> DeleteServicio(int id)
         {
-            var servicio = await _context.Servicio.FindAsync(id);
-            if (servicio == null)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+        
+           var servicio = await _context.Servicio.SingleOrDefaultAsync(m => m.Id == id);
+          /*  var descrp = await _context.Servicio.Select(x => new {Servicio = x, Descripcion = x.Descripcions.Where(e => e.)}}).FirstOrDefaultAsync();
+
+          /*  try
+            {
+              var direcciones = await _context.Descripcion.ToListAsync();
+              for (int i = 0; i < direcciones.Count; i++)
+              {
+                 if(direcciones[i].) 
+              }
+                _context.RemoveRange(direcciones);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }*/
+              if (servicio == null)
             {
                 return NotFound();
             }
-
             _context.Servicio.Remove(servicio);
             await _context.SaveChangesAsync();
 

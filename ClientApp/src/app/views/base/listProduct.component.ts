@@ -50,7 +50,7 @@ export class listProductComponent implements OnInit
     }
     deleteServicio(servicio: IServicio): void {
       
-      this.serviciosServ.delete(servicio)  
+      this.serviciosServ.delete(servicio)
       .subscribe(data => this.cargarData(),
       error => console.error(error));
   }  
@@ -64,7 +64,7 @@ export class listProductComponent implements OnInit
   }
  openEdit(id: number)
   {    
-      this.router.navigate(["/base/crearservicio/" + id]);
+      this.router.navigate(["/base/editarservicio/" + id]);
   }
   
   public openPDF(servicio: IServicio)
@@ -73,6 +73,7 @@ export class listProductComponent implements OnInit
     console.log(list);
    let data = document.getElementById("exportthis");
    let subtotal = document.getElementById("subtotal");
+   let estado = document.getElementById("estado");
    let nombre = document.getElementById("nombre");
    let totales = document.getElementById("totales");
    let manobra = document.getElementById("manobra");
@@ -89,7 +90,7 @@ export class listProductComponent implements OnInit
     const pdf = new PdfMakeWrapper();  
     pdf.add(
       pdf.ln(2));
-    pdf.add(new Txt('INVOICE').alignment('right').bold().fontSize(20).end);
+   // pdf.add(new Txt('INVOICE').alignment('right').bold().fontSize(20).end);
     pdf.info({
       title: 'AC VIDAL LLC INVOICE',
       author: 'AC VIDAL LLC',
@@ -97,11 +98,12 @@ export class listProductComponent implements OnInit
   });
     pdf.add(
       pdf.ln(2));
-    pdf.add(new Txt('INVOICE').alignment('center').bold().fontSize(12).end);
-    pdf.add(new Txt('(713)303-7145   (786)262-1834').alignment('center').bold().fontSize(8).end);
+    pdf.add(new Txt('AC VIDAL LLC').alignment('center').bold().fontSize(12).end);
+    pdf.add(new Txt('(786)262-1834   (713)303-7145').alignment('center').bold().fontSize(8).end);
+    pdf.add(new Txt('License No.: 969378061115').alignment('center').bold().fontSize(8).end);
     pdf.add(
     pdf.ln(2));
-    pdf.add(new Txt(['Invoice No: ', idservicio.textContent]).alignment('right').bold().fontSize(8).end);
+    pdf.add(new Txt([estado.textContent,' ','No: ', idservicio.textContent]).alignment('right').bold().fontSize(8).end);
     pdf.add(new Txt(['Date: ', date.textContent]).alignment('right').bold().fontSize(8).end);  
     pdf.add(new Txt(['Customer: ',nombre.textContent]).alignment('justify').bold().fontSize(8).end);   
     pdf.add(new Txt(['Address: ', addrees.textContent]).alignment('justify').bold().fontSize(8).end); 

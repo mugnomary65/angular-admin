@@ -91,10 +91,10 @@ export class ClienteComponent implements OnInit  {
     }  
   }
   onSaveSuccess(){
-    this.router.navigate(["/base/listclientes"]);
+    this.router.navigate(["/base/listclients"]);
     
   }
   existenCambiosPendientes(): void {
-    this.router.navigate(["/base/listclientes"]);
+    this.router.navigate(["/base/listclients"]);
   }
 }

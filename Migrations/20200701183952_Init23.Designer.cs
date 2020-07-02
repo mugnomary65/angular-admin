@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using angular_admin.Models;
 
 namespace angular_admin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200701183952_Init23")]
+    partial class Init23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -338,7 +340,7 @@ namespace angular_admin.Migrations
 
                     b.HasIndex("EstadoId");
 
-                    b.ToTable("Servicio");
+                    b.ToTable("Servicios");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -396,8 +398,7 @@ namespace angular_admin.Migrations
                 {
                     b.HasOne("angular_admin.Models.Servicio", null)
                         .WithMany("Descripcions")
-                        .HasForeignKey("ServicioId1")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ServicioId1");
                 });
 
             modelBuilder.Entity("angular_admin.Models.Servicio", b =>

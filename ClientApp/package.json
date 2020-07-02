@@ -28,6 +28,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.1.0",
     "@angular/animations": "^9.1.10",
     "@angular/cdk": "^9.2.2",
     "@angular/common": "^9.1.1",
@@ -35,6 +36,7 @@
     "@angular/core": "^9.1.1",
     "@angular/fire": "^6.0.0",
     "@angular/forms": "^9.1.1",
+    "@angular/google-maps": "^10.0.1",
     "@angular/localize": "^9.1.1",
     "@angular/material": "^9.2.2",
     "@angular/platform-browser": "^9.1.1",

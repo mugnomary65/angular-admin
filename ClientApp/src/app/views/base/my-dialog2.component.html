@@ -128,7 +128,7 @@
                        
                        </td>
                        <td>
-                        <input type= "number" formControlName="total"  [attr.id]="'total'+ i" value={{precioTotal(i)}}  >   
+                        <input type= "number" formControlName="total"  [attr.id]="'total'+ i" readonly value={{precioTotal(i)}}  >   
                      
                         </td>
                                          
@@ -152,7 +152,7 @@
                   <span class="input-group-text">TotalNeto</span>
                 </div>
                 <div class="input-group-append">
-                  <input class="form-control" type="number" formControlName="gastosNetos" id="gastosNetos" value={{totalNeto()}}>
+                  <input class="form-control" type="number" formControlName="gastosNetos" id="gastosNetos" readonly value={{totalNeto()}}>
                 </div>             
               </div>             
             </div> 
@@ -164,7 +164,7 @@
                 <span class="input-group-text" >Tax</span>
               </div>
               <div class="input-group-append">
-              <input class="form-control" type="number" formControlName="seisporciento" id="seisporciento" value={{seisPorCiento()}}>
+              <input class="form-control" type="number" formControlName="seisporciento" id="seisporciento" readonly value={{seisPorCiento()}}>
               </div>             
             </div>             
           </div> 
@@ -176,7 +176,7 @@
               <span class="input-group-text" class="form-control">SubTotal</span>
             </div>
             <div class="input-group-append">
-            <input class="form-control" type="number"  formControlName="subtotal" id="subtotal" value={{subTotal()}} >
+            <input class="form-control" type="number"  formControlName="subtotal" id="subtotal" readonly value={{subTotal()}} >
             </div>             
           </div>             
         </div> 
@@ -200,7 +200,7 @@
               <span class="input-group-text">30%</span>
             </div>
             <div class="input-group-append">
-            <input class="form-control" type="number" formControlName="tiosan" value={{tioSan()}}>
+            <input class="form-control" type="number" formControlName="tiosan" readonly value={{tioSan()}}>
             </div>             
           </div>             
         </div> 
@@ -213,7 +213,7 @@
                   <span class="input-group-text">Total</span>
                 </div>
                 <div class="input-group-append">
-                <input class="form-control" formControlName="total"  type="number" value={{totalComplto()}}>
+                <input class="form-control" formControlName="total"  type="number" readonly value={{totalComplto()}}>
                 </div>             
               </div>              
             </div>  
@@ -225,7 +225,7 @@
                 <span class="input-group-text">Ganancias</span>
               </div>
               <div class="input-group-append">
-              <input class="form-control" type="number" formControlName="ganancias" value={{gananciasTotal()}}>
+              <input class="form-control" type="number" formControlName="ganancias" readonly value={{gananciasTotal()}}>
               </div>             
             </div>             
           </div> 

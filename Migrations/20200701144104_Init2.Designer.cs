@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using angular_admin.Models;
 
 namespace angular_admin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200701144104_Init2")]
+    partial class Init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,7 +293,7 @@ namespace angular_admin.Migrations
 
             modelBuilder.Entity("angular_admin.Models.Servicio", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ServicioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -301,6 +303,9 @@ namespace angular_admin.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DescripcionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("EstadoId")
                         .HasColumnType("int");
@@ -332,13 +337,13 @@ namespace angular_admin.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.HasKey("ServicioId");
 
                     b.HasIndex("ClienteID");
 
                     b.HasIndex("EstadoId");
 
-                    b.ToTable("Servicio");
+                    b.ToTable("Servicios");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -396,8 +401,7 @@ namespace angular_admin.Migrations
                 {
                     b.HasOne("angular_admin.Models.Servicio", null)
                         .WithMany("Descripcions")
-                        .HasForeignKey("ServicioId1")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ServicioId1");
                 });
 
             modelBuilder.Entity("angular_admin.Models.Servicio", b =>
