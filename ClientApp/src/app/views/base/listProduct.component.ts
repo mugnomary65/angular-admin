@@ -151,6 +151,9 @@ export class listProductComponent implements OnInit
     pdf.footer(new Txt('AC VIDAL LLC').alignment('center').bold().fontSize(8).end);    
       
     pdf.create().open();
+    pdf.create().download('AC VIDAL LLC.pdf')
+
+
     
 
   
