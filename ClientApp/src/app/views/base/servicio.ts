@@ -5,6 +5,7 @@ import { IDescription } from './description';
 export interface IServicio{
     id: number;
     idServicio:string;
+    formapagos: string;
     descripcions: IDescription[];  
     total: number;
     date: Date; 

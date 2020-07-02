@@ -305,6 +305,9 @@ namespace angular_admin.Migrations
                     b.Property<int>("EstadoId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Formapagos")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Ganancias")
                         .HasColumnType("float");
 

@@ -32,21 +32,21 @@ const routes: Routes = [
       },
     
       {
-        path: 'crearservicio',
+        path: 'addservice',
         component: MyDialog2Component,
      
         data: {
-          title: 'Crear servicio'
+          title: 'Add service'
         }
       },
       {
-        path: 'editarservicio/:id',
+        path: 'editservice/:id',
         component: MyDialog2Component,
       
       },
    
       {
-        path: 'crearcliente',
+        path: 'addclient',
         component: ClienteComponent,
       
         data: {
@@ -54,7 +54,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'editarcliente/:id',
+        path: 'editclient/:id',
         component: ClienteComponent,
       
       },
@@ -64,7 +64,7 @@ const routes: Routes = [
         component: listclientesComponent,
        
         data: {
-          title: 'Lista'
+          title: 'Clients'
         }
       },
       
@@ -74,7 +74,7 @@ const routes: Routes = [
         component: listProductComponent,
        
         data: {
-          title: 'Servicio'
+          title: 'Services'
         }
       },
          

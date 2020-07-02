@@ -29,7 +29,7 @@ export class listclientesComponent implements OnInit
     private serviceService: ServiceService,
     private router: Router ) { }
   openDialog(){
-    this.router.navigate(["/base/crearcliente"]);
+    this.router.navigate(["/base/addclient"]);
   }
   ngOnInit()
   {
@@ -39,7 +39,7 @@ export class listclientesComponent implements OnInit
   }
   openEdit(id: number)
   {    
-      this.router.navigate(["/base/editarcliente/" + id]);
+      this.router.navigate(["/base/editclient/" + id]);
   }
 
   getClientes():void{

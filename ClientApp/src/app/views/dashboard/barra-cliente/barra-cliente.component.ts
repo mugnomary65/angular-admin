@@ -35,7 +35,7 @@ export class BarraClienteComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     { data:[], label: '' },
-    { data:[], label: 'Clientes' },
+    { data:[], label: 'Clients' },
     
   ];
 
@@ -60,7 +60,7 @@ export class BarraClienteComponent implements OnInit {
     this.barChartData = [
       { data: [], label: '',
     }, 
-      { data: this.meses1, label: 'Clientes',
+      { data: this.meses1, label: 'Clients',
        }
       
        ]})

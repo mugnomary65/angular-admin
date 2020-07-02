@@ -33,8 +33,8 @@ export class BarraComponent  implements OnInit {
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
-    { data:[], label: 'Gastos' },
-    { data: [], label: 'Ganancias' }
+    { data:[], label: 'Expenses' },
+    { data: [], label: 'Earnings' }
   ];
 
   ngOnInit() {
@@ -67,8 +67,8 @@ export class BarraComponent  implements OnInit {
     .subscribe((gananciaData) => { this.meses = gananciaData, console.log('meses:', this.meses),
     this.gananciasService.getGastosDashboard().subscribe(gastosData => {this.gastos = gastosData,
     this.barChartData = [
-       { data: this.gastos, label: 'Gastos' },
-       { data: this.meses, label: 'Ganancias' }]})});
+       { data: this.gastos, label: 'Expenses' },
+       { data: this.meses, label: 'Earnings' }]})});
   }
 }
 

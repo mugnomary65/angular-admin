@@ -34,20 +34,21 @@ export class MyDialog2Component implements OnInit {
   servicio: IServicio;
   control: FormArray;
   control1: FormArray;
-  cantidad: number;
-  precio: number;
-  preciototal;
+  cantidad: number = 0;
+  precio: number = 0;
+  preciototal: number = 0;
   cantidades: [];
   precios: [];
   editField: string;
-  seisporciento: number;
-  seisporcientoTotal: number;
-  subtotal: number;
-  tiosan: number;
-  total: number;
-  gastosNetos: number;
-    ganancias: number;
-  
+  seisporciento: number = 0;
+  seisporcientoTotal: number = 0;
+  subtotal: number = 0;
+  tiosan: number = 0;
+  total: number = 0;
+  gastosNetos: number = 0;
+    ganancias: number = 0;
+formapagos: string = '';
+  selectpago: string = '';
   
   constructor(
     public fb1: FormBuilder, 
@@ -63,9 +64,10 @@ export class MyDialog2Component implements OnInit {
   )
      { 
       this.miFormulario1 = this.fb1.group({
-        idServicio:['', Validators.required],
-        descripcions: this.fb1.array([]),   
-       total:['', Validators.required],
+        idServicio:[''],
+        descripcions: this.fb1.array([]),  
+        formapagos:['', Validators.required], 
+       total:[''],
         date:['', Validators.required],
         nota:['', Validators.required],
         clienteId:['', Validators.required],
@@ -86,6 +88,7 @@ export class MyDialog2Component implements OnInit {
   {
     this.clientes = this.clientesService.getClientes();
    this.estados = this.estadosService.getEstado();  
+   
    this.activatedRoute.params.subscribe(params => {
     if (params["id"] == undefined) {
       return;
@@ -132,6 +135,7 @@ export class MyDialog2Component implements OnInit {
        total: servicio.total,
        date: dp.transform(servicio.date, format),
        nota: servicio.nota,
+       formapagos: servicio.formapagos,
        clienteId: servicio.clientes.clienteId,
        estadoId: servicio.estados.estadoId,
        clientes: servicio.clientes,
@@ -157,10 +161,11 @@ export class MyDialog2Component implements OnInit {
 
  save() {
   this.ignorarExistenCambiosPendientes = true;  
-  /*if(this.touchedAndInvalid)
-  {
-    return this.alertService.warn('Lo sentimos, ha ocurrido un error.');
-  }*/
+  if(this.miFormulario1.invalid)
+  { 
+    this.miFormulario1.markAllAsTouched();   
+    return this.alertService.error('You must fill the required fields');
+  }
  
    let servicio: IServicio =Object.assign({}, this.miFormulario1.value) ;
     
@@ -173,7 +178,7 @@ export class MyDialog2Component implements OnInit {
    
    this.serviceServic.updateServicio(servicio)
      .subscribe(servicio => this.borrarServicio(),
-       error => this.alertService.error('Lo sentimos, ha ocurrido un error.'));
+       error => this.alertService.error('Sorry an error occurred.'));
           
     } else {
 
@@ -181,7 +186,7 @@ export class MyDialog2Component implements OnInit {
 
     this.serviceServic.createServicio(servicio)
  .subscribe(servicio => this.onSaveSuccess(), 
- error => this.alertService.error('Lo sentimos, ha ocurrido un error.'));
+ error => this.alertService.error('Sorry an error occurred.'));
  
   }  
     
@@ -201,10 +206,10 @@ export class MyDialog2Component implements OnInit {
    agregarDescripcion() {
      const descripcions = this.fb1.group({
       id:[0],
-      cantidad:['', Validators.required],
-      texto:['', Validators.required],
-      precio: ['', Validators.required],
-      total: ['', Validators.required],
+      cantidad:[''],
+      texto:[''],
+      precio: [''],
+      total: [''],
       servicioId: this.servicioId != null ? this.servicioId : 0,
      })
 
@@ -252,11 +257,9 @@ export class MyDialog2Component implements OnInit {
   }
   changeValue(index: number){
     var arrayControl = this.miFormulario1.get('descripcions') as FormArray;
-    var item = arrayControl.at(index);
-    console.log("item",item);
+    var item = arrayControl.at(index);  
     var variable = item.value;
-    variable.total = variable.cantidad * variable.precio;
-    console.log("total",variable.total);
+        variable.total = variable.cantidad * variable.precio;   
     this.preciototal = variable.total;
    
     
@@ -266,10 +269,10 @@ export class MyDialog2Component implements OnInit {
   precioTotal(id: number): number {
     var arrayControl = this.miFormulario1.get('descripcions') as FormArray;
     var item = arrayControl.at(id);
-    console.log("item",item);
+
     var variable = item.value;
     variable.total = variable.cantidad * variable.precio;
-    console.log("total",variable.total); 
+   
   return this.preciototal = variable.total;
    
 
@@ -294,12 +297,12 @@ export class MyDialog2Component implements OnInit {
     this.seisporcientoTotal = seis;
     this.miFormulario1.controls['seisporciento'].setValue(seis);
     //return servicio.seisporciento = seis;
-    console.log('dhhd');
+
    
      
   }
 
-    //Calculo de la suma de todos m'as el 6%
+    //Calculo de la suma del total de gastos mas el 6%
   subTotal()
   {
     let sub = 0;
@@ -307,28 +310,38 @@ export class MyDialog2Component implements OnInit {
     this.subtotal = sub;
     //para setear cualquier valor en el formulario solo se debe ejecutar la siguiente linea de codigo
     this.miFormulario1.controls['subtotal'].setValue(sub); 
-    console.log("subtotal:",this.subtotal);
+    
   }
    //Calculo del 30% de la mano de obra
   tioSan()
   {
+
     let tio = 0;
     let servicio: IServicio =Object.assign({}, this.miFormulario1.value) ;
     let workforce= servicio.manobra;
-    tio = workforce * 0.30;
+      
+    if(servicio.formapagos == 'Check')
+      {
+        tio = workforce * 0.30;
+      }
+   else if(servicio.formapagos == 'Cash')
+    {
+     tio = workforce * 0.30;
+     tio = tio / 2;
+    }    
     this.miFormulario1.controls['tiosan'].setValue(tio);
-    console.log('assas');
+
   }
   //Calculo del subtotal - el 30%
   totalComplto()
   {
     let totales = 0;
-    let servicio: IServicio =Object.assign({}, this.miFormulario1.value) ;
+    let servicio: IServicio =Object.assign({}, this.miFormulario1.value) ;   
     let workforce= servicio.manobra;
      totales = this.subtotal + workforce;
      servicio.total = this.total;     
      this.miFormulario1.controls['total'].setValue(totales);
-     console.log(servicio.total);
+     
   }
   gananciasTotal()
   {
@@ -339,7 +352,7 @@ export class MyDialog2Component implements OnInit {
     tio = workforce * 0.30;
     totalganancia = workforce - tio; 
     this.miFormulario1.controls['ganancias'].setValue(totalganancia);
-    console.log('assas');
+
   }
   totalNeto()
   {
@@ -348,9 +361,12 @@ export class MyDialog2Component implements OnInit {
     this.subtotal = sub;
     //para setear cualquier valor en el formulario solo se debe ejecutar la siguiente linea de codigo
     this.miFormulario1.controls['gastosNetos'].setValue(sub); 
-    console.log("gastosNetos:",this.subtotal);
+  
   }
-
+  radioChangeHandler(event: any){
+   this.selectpago = event.target.value; 
+   
+ }
  
 
 }

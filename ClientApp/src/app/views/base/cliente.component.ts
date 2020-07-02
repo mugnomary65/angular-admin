@@ -5,6 +5,7 @@ import { AlertService } from '.';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICliente } from './cliente';
 import { DatePipe } from '@angular/common';
+import { element } from 'protractor';
 
 @Component({
     templateUrl: 'cliente.component.html',
@@ -22,12 +23,12 @@ export class ClienteComponent implements OnInit  {
     ) 
      {
      this.miFormulario = this.fb.group({
-      nombre: ['', Validators.required],
-     email: ['', Validators.email],
-     telefono:['', Validators.required],
-     address:['', Validators.required],
-     zipCode: ['', Validators.required],
-     date: ['', Validators.required],
+      nombre: [''],
+     email: [''],
+     telefono:[''],
+     address:[''],
+     zipCode: [''],
+     date: ['',Validators.required],
    });
     }
     touchedAndInvalid = (controlName: string) => this.miFormulario.get(controlName).touched && this.miFormulario.get(controlName).invalid;
@@ -64,13 +65,13 @@ export class ClienteComponent implements OnInit  {
      });
     }
   save(){
-    this.ignorarExistenCambiosPendientes = true;  
-    /*if(this.touchedAndInvalid)
-    {
-      return this.alertService.warn('Lo sentimos, ha ocurrido un error.');
-    }*/
-   
+    this.ignorarExistenCambiosPendientes = true;     
      let cliente: ICliente =Object.assign({}, this.miFormulario.value) ;
+    if(this.miFormulario.invalid)
+    { 
+      this.miFormulario.markAllAsTouched();   
+      return this.alertService.error('You must fill the required fields');
+    }
               
     if (this.modoEdicion) {
       // editar el registro
@@ -86,7 +87,7 @@ export class ClienteComponent implements OnInit  {
   
       this.clientesService.createCliente(cliente)
    .subscribe(cliente => this.onSaveSuccess(), 
-   error => this.alertService.error('Lo sentimos, ha ocurrido un error.'));
+   error => this.alertService.error('Sorry an error occurred.'));
    
     }  
   }

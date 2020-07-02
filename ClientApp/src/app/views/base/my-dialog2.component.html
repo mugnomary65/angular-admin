@@ -6,7 +6,7 @@
     <div class="card">
       <!--<h4 class="modal-title w-100 font-weight-bold">Registro</h4>-->
       <div class="card-header">
-      <h3>{{modoEdicion ? 'Editar' : 'Agregar'}} servicios</h3>
+      <h3>{{modoEdicion ? 'Edit' : 'Add'}} services</h3>
       </div>
       <div class="card-body"> 
           
@@ -15,15 +15,13 @@
           <div class="form-group">
               <div class="input-group col">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">Cliente</span>
+                  <span class="input-group-text">Clients</span>
                 </div>
                 <div class="input-group-append ">                      
                   <select class="form-control " [class.is-invalid]="touchedAndInvalid('clienteId')" id="nombre" name="clienteId" formControlName="clienteId" aria-placeholder="--Seleccione un cliente--">
                   <option *ngFor="let objeto of clientes |async" [ngValue]= "objeto.clienteId">{{objeto.nombre}}</option>
                   </select>   
-                  <div *ngIf="touchedAndInvalid('clienteId')" class="input-errors">
-                    <div *ngIf="miFormulario1.get('clienteId').errors.required"><p class="text-danger">Campo requerido.</p></div>
-                </div>              
+                  
          </div>                
        </div>
        </div>
@@ -34,65 +32,67 @@
           </div>
           <div class="input-group-append">
           <input [class.is-invalid]="touchedAndInvalid('date')" type="date" id="date" formControlName="date" class="form-control">
-       
-          </div>
-           <div *ngIf="touchedAndInvalid('date')" class="input-errors">
-            <div *ngIf="miFormulario1.get('date').errors.required" >
-                <p class="text-danger">Campo requerido.</p>
-            </div>
+         </div> 
         </div>
-       
-       
-        </div>
-      
       </div>
+         <div class="form-group">      
+          <div class="input-group col">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Method of payment
+              </span>
+            </div>
+            <div class="input-group-append ">                      
+              <select class="form-control " [class.is-invalid]="touchedAndInvalid('formapagos')" id="forma" name="formapagos" formControlName="formapagos" aria-placeholder="--Seleccione una forma de pago--" required>
+              <option value="Check">Check</option>
+              <option value="Cash">Cash</option>
+              </select>               
+         </div>    
+        </div>
+      </div>
+      
+      
+     
           <div class="form-group">
             <div class="input-group col">
               <div class="input-group-prepend">
                 <span class="input-group-text">Id</span>
               </div>
               <div class="input-group-append">
-              <input [class.is-invalid]="touchedAndInvalid('idServicio')" type="text" id="idServicio" formControlName="idServicio" class="form-control" required>
+              <input type="text" id="idServicio" formControlName="idServicio" class="form-control" >
               </div>   
-              <div *ngIf="touchedAndInvalid('idServicio')" class="input-errors">
-                <div *ngIf="miFormulario1.get('idServicio').errors.required"><p class="text-danger">Campo requerido.</p></div>
-            </div>               
+                       
             </div>
            
           </div> 
           <div class="form-group">
             <div class="input-group col">
               <div class="input-group-prepend">
-                <span class="input-group-text">Estado</span>
+                <span class="input-group-text">State</span>
               </div>
               <div class="input-group-append">                      
                 <select class="form-control" [class.is-invalid]="touchedAndInvalid('estadoId')" id="estadoId"  name="estadoId" formControlName="estadoId" >
                   <option *ngFor="let objeto of estados |async" [ngValue]= "objeto.estadoId">{{objeto.nombre}}</option>
                 </select>
                 </div>
-                <div *ngIf="touchedAndInvalid('estadoId')" class="input-errors">
-                  <div *ngIf="miFormulario1.get('estadoId').errors.required"><p class="text-danger">Campo requerido.</p></div>
-              </div>
+              
             </div>
            
           </div>    
           <div class="form-group">
             <div class="input-group col">
               <div class="input-group-prepend">
-                <span class="input-group-text">Observaciones</span>
+                <span class="input-group-text">Remark</span>
               </div>
               <div class="input-group-append">                      
                 <textarea class="form-control" [class.is-invalid]="touchedAndInvalid('nota')"  id="nota" name="nota" formControlName="nota" >
               </textarea>
                 </div>
-                <div *ngIf="touchedAndInvalid('nota')" class="input-errors">
-                  <div *ngIf="miFormulario1.get('nota').errors.required"><p class="text-danger">Campo requerido.</p></div>
-              </div>
+                
              
             </div>
-           
           </div>
-        </div>
+          </div>
+         
           <div formArrayName= "descripcions">
             <div class="card w-150">
               <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Descripcion</h3>
@@ -107,7 +107,7 @@
                       <tr>
                         <th class="text-center">Cant</th>
                         <th class="text-center">Descripcion</th>
-                        <th class="text-center">Precio</th>    
+                        <th class="text-center">Price</th>    
                         <th class="text-center">Total</th>                      
                         <th class="text-center">Remove</th>
                       </tr>
@@ -181,6 +181,8 @@
           </div>             
         </div> 
       </div>
+      
+      
           <div class="form-group">
             <div class="input-group col">
             <div class="input-group">
@@ -188,7 +190,7 @@
                 <span class="input-group-text">Work Force</span>
               </div>
               <div class="input-group-append">
-              <input type="number" id="manobra" formControlName="manobra" class="form-control">
+              <input  [class.is-invalid]="touchedAndInvalid('manobra')" type="number" id="manobra" formControlName="manobra" class="form-control" required>
               </div>             
             </div>             
           </div> 
@@ -222,7 +224,7 @@
             <div class="input-group col">
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">Ganancias</span>
+                <span class="input-group-text">Earnings</span>
               </div>
               <div class="input-group-append">
               <input class="form-control" type="number" formControlName="ganancias" readonly value={{gananciasTotal()}}>
@@ -230,7 +232,8 @@
             </div>             
           </div> 
         </div>  
-        </div>         
+      </div>
+               
             <span class="float-right mb-3 mr-2">
               <button type="submit" class="btn btn-primary">Submit</button>
             <button (click)="existenCambiosPendientes()"  class="btn btn-danger">Cancelar</button>

@@ -10,8 +10,8 @@ using angular_admin.Models;
 namespace angular_admin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200701214429_Init63")]
-    partial class Init63
+    [Migration("20200702220352_Init3")]
+    partial class Init3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -306,6 +306,9 @@ namespace angular_admin.Migrations
 
                     b.Property<int>("EstadoId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Formapagos")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Ganancias")
                         .HasColumnType("float");

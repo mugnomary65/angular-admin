@@ -15,6 +15,7 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 import {pdfmake} from 'pdfmake';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from './alert.service';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -60,33 +61,35 @@ export class listProductComponent implements OnInit
   }
   openCrear(): void
   {
-      this.router.navigate(["/base/crearservicio"]);
+      this.router.navigate(["/base/addservice"]);
   }
  openEdit(id: number)
   {    
-      this.router.navigate(["/base/editarservicio/" + id]);
+      this.router.navigate(["/base/editservice/" + id]);
   }
   
   public openPDF(servicio: IServicio)
   {
     let list = servicio.descripcions;
     console.log(list);
-   let data = document.getElementById("exportthis");
-   let subtotal = document.getElementById("subtotal");
-   let estado = document.getElementById("estado");
-   let nombre = document.getElementById("nombre");
-   let totales = document.getElementById("totales");
-   let manobra = document.getElementById("manobra");
-   let tiosan = document.getElementById("tiosan");
-   let date= document.getElementById("date");
-   let addrees= document.getElementById("addrees");
-   let telefono =document.getElementById("telefono");
-   let zipCode= document.getElementById("zipCode");
-   let idservicio= document.getElementById("idservicio");
-   let email= document.getElementById("email");
+    var format= "yyyy-MM-dd";
+   let subtotal = servicio.subtotal;
+   let estado = servicio.estados.nombre;
+   let nombre = servicio.clientes.nombre;
+   let totales = servicio.total;
+   let manobra = servicio.manobra;
+   let tiosan = servicio.tiosan;
+   var dp = new DatePipe(navigator.language);
+   let date= dp.transform(servicio.date, format);
+   let addrees= servicio.clientes.address;
+   let telefono =servicio.clientes.telefono;
+   let zipCode= servicio.clientes.zipCode;
+   let idservicio= servicio.idServicio;
+   let email= servicio.clientes.email;
+   let nota= servicio.nota;
    var cont = 0;
    var i = 0;
-    console.log(data);
+   
     const pdf = new PdfMakeWrapper();  
     pdf.add(
       pdf.ln(2));
@@ -99,36 +102,41 @@ export class listProductComponent implements OnInit
     pdf.add(
       pdf.ln(2));
     pdf.add(new Txt('AC VIDAL LLC').alignment('center').bold().fontSize(12).end);
+    pdf.add(new Txt(' 2504 Fureen Dr Louisville, KY 40218').alignment('center').bold().fontSize(8).end);
     pdf.add(new Txt('(786)262-1834   (713)303-7145').alignment('center').bold().fontSize(8).end);
     pdf.add(new Txt('License No.: 969378061115').alignment('center').bold().fontSize(8).end);
     pdf.add(
     pdf.ln(2));
-    pdf.add(new Txt([estado.textContent,' ','No: ', idservicio.textContent]).alignment('right').bold().fontSize(8).end);
-    pdf.add(new Txt(['Date: ', date.textContent]).alignment('right').bold().fontSize(8).end);  
-    pdf.add(new Txt(['Customer: ',nombre.textContent]).alignment('justify').bold().fontSize(8).end);   
-    pdf.add(new Txt(['Address: ', addrees.textContent]).alignment('justify').bold().fontSize(8).end); 
-    pdf.add(new Txt(['Zip Code: ', zipCode.textContent]).alignment('justify').bold().fontSize(8).end);     
-    pdf.add(new Txt(['Telephone: ',telefono.textContent]).alignment('justify').bold().fontSize(8).end);
-    pdf.add(new Txt(['Email: ',email.textContent]).alignment('justify').bold().fontSize(8).end);  
+    pdf.add(new Txt([estado,' ','No: ', idservicio]).alignment('right').bold().fontSize(8).end);
+    pdf.add(new Txt(['Date: ', date]).alignment('right').bold().fontSize(8).end);  
+    pdf.add(new Txt(['Customer: ',nombre]).alignment('justify').bold().fontSize(8).end);   
+    pdf.add(new Txt(['Address: ', addrees]).alignment('justify').bold().fontSize(8).end); 
+    pdf.add(new Txt(['Zip Code: ', zipCode]).alignment('justify').bold().fontSize(8).end);     
+    pdf.add(new Txt(['Telephone: ',telefono]).alignment('justify').bold().fontSize(8).end);
+    pdf.add(new Txt(['Email: ',email]).alignment('justify').bold().fontSize(8).end);  
    
     
     pdf.add(
-      pdf.ln(2));
-      pdf.add(new Txt('Description').alignment('center').bold().fontSize(10).end);
+      pdf.ln(2));      
    while (cont == 0 && i < list.length) {
     pdf.add(new Table([
-      ['Cant', 'Products', 'Price', 'Total'],
-   ]).widths([20, 300,50,50]).color('black').alignment('justify').bold().fontSize(8).end);  
+      ['Description'],
+   ]).widths([ 500]).color('black').alignment('justify').bold().fontSize(8).end);  
  
    cont++;
    }   
    for (let index = 0; index < list.length; index++) {
      const element = list[index];
      pdf.add(new Table([
-    [ element.cantidad,element.texto,element.precio,element.total]     
-   ]).widths([20, 300, 50, 50]).alignment('justify').fontSize(8).end); 
+    [ element.texto]     
+   ]).widths([500]).alignment('justify').fontSize(8).end); 
      
    }    
+   if(list.length == 0)
+   {
+    pdf.add(new Txt(['Remark']).alignment('justify').bold().fontSize(8).end);
+    pdf.add(new Txt([nota]).alignment('justify').bold().fontSize(8).end);
+   }
    pdf.add(
     pdf.ln(1));    
     pdf.add(
@@ -136,16 +144,14 @@ export class listProductComponent implements OnInit
           new Rect([70,0], [80,0]).end
       ]).alignment('right').end
   );
-  pdf.add(new Txt(['Subtotal: ',subtotal.textContent]).alignment('right').bold().fontSize(8).end);
-  pdf.add(new Txt(['Work force: ',manobra.textContent]).alignment('right').bold().fontSize(8).end);
-  pdf.add(new Txt(['Tax: ',tiosan.textContent]).alignment('right').bold().fontSize(8).end);
-  pdf.add(new Txt(['Total: ',totales.textContent]).alignment('right').bold().fontSize(8).end);
+ 
+  pdf.add(new Txt(['Total amount: ', totales.toString()]).alignment('right').bold().fontSize(8).end);
   
 
     pdf.footer(new Txt('AC VIDAL LLC').alignment('center').bold().fontSize(8).end);    
       
     pdf.create().open();
-    pdf.create().download('AC VIDAL LLC.pdf')
+    
 
   
   }

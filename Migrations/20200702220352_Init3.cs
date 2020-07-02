@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace angular_admin.Migrations
 {
-    public partial class Init2 : Migration
+    public partial class Init3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -184,15 +184,16 @@ namespace angular_admin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Servicios",
+                name: "Servicio",
                 columns: table => new
                 {
-                    ServicioId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdServicio = table.Column<string>(nullable: true),
                     Total = table.Column<double>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Manobra = table.Column<double>(nullable: false),
+                    Formapagos = table.Column<string>(nullable: true),
                     Seisporciento = table.Column<double>(nullable: false),
                     Subtotal = table.Column<double>(nullable: false),
                     Tiosan = table.Column<double>(nullable: false),
@@ -200,20 +201,19 @@ namespace angular_admin.Migrations
                     Ganancias = table.Column<double>(nullable: false),
                     Nota = table.Column<string>(nullable: true),
                     ClienteID = table.Column<int>(nullable: false),
-                    EstadoId = table.Column<int>(nullable: false),
-                    DescripcionId = table.Column<int>(nullable: false)
+                    EstadoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Servicios", x => x.ServicioId);
+                    table.PrimaryKey("PK_Servicio", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Servicios_Clientes_ClienteID",
+                        name: "FK_Servicio_Clientes_ClienteID",
                         column: x => x.ClienteID,
                         principalTable: "Clientes",
                         principalColumn: "ClienteId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Servicios_Estados_EstadoId",
+                        name: "FK_Servicio_Estados_EstadoId",
                         column: x => x.EstadoId,
                         principalTable: "Estados",
                         principalColumn: "EstadoId",
@@ -236,11 +236,11 @@ namespace angular_admin.Migrations
                 {
                     table.PrimaryKey("PK_Descripcion", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Descripcion_Servicios_ServicioId1",
+                        name: "FK_Descripcion_Servicio_ServicioId1",
                         column: x => x.ServicioId1,
-                        principalTable: "Servicios",
-                        principalColumn: "ServicioId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalTable: "Servicio",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -288,13 +288,13 @@ namespace angular_admin.Migrations
                 column: "ServicioId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Servicios_ClienteID",
-                table: "Servicios",
+                name: "IX_Servicio_ClienteID",
+                table: "Servicio",
                 column: "ClienteID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Servicios_EstadoId",
-                table: "Servicios",
+                name: "IX_Servicio_EstadoId",
+                table: "Servicio",
                 column: "EstadoId");
         }
 
@@ -325,7 +325,7 @@ namespace angular_admin.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Servicios");
+                name: "Servicio");
 
             migrationBuilder.DropTable(
                 name: "Clientes");
