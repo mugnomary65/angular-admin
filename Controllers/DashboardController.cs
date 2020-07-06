@@ -42,14 +42,14 @@ namespace angular_admin.Controllers
                
         }
         
-        [HttpGet("gastosnetos")]
-        public async Task<ActionResult<double>> GetGastosNetos()
+        [HttpGet("tioSanDashb")]
+        public async Task<ActionResult<double>> GetTioSan()
         {           
           var servicios = _context.Servicio.ToList();
           double cant = 0;
           for (int i = 0; i < servicios.Count; i++)
           {
-              cant += servicios[i].Subtotal;
+              cant += servicios[i].Tiosan;
           }
           
         double y = Math.Round(cant,2);

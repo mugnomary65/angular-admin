@@ -10,8 +10,8 @@ using angular_admin.Models;
 namespace angular_admin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200702220352_Init3")]
-    partial class Init3
+    [Migration("20200706191857_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -171,6 +171,12 @@ namespace angular_admin.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -291,6 +297,26 @@ namespace angular_admin.Migrations
                     b.ToTable("Estados");
                 });
 
+            modelBuilder.Entity("angular_admin.Models.JobSeeker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("IdentityId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityId");
+
+                    b.ToTable("JobSeekers");
+                });
+
             modelBuilder.Entity("angular_admin.Models.Servicio", b =>
                 {
                     b.Property<int>("Id")
@@ -324,6 +350,9 @@ namespace angular_admin.Migrations
 
                     b.Property<string>("Nota")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PrecioReal")
+                        .HasColumnType("float");
 
                     b.Property<double>("Seisporciento")
                         .HasColumnType("float");
@@ -403,6 +432,13 @@ namespace angular_admin.Migrations
                         .WithMany("Descripcions")
                         .HasForeignKey("ServicioId1")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("angular_admin.Models.JobSeeker", b =>
+                {
+                    b.HasOne("angular_admin.Models.ApplicationUser", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId");
                 });
 
             modelBuilder.Entity("angular_admin.Models.Servicio", b =>

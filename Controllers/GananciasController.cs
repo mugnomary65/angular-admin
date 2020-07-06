@@ -35,6 +35,7 @@ namespace angular_admin.Controllers
           double x;
           
           List<double> meses = new List<double>();
+          double tiosan = 0;
          public GananciasController(ApplicationDbContext context)
          {
              _context = context;
@@ -222,6 +223,9 @@ namespace angular_admin.Controllers
             meses.Add(diciembre);
           return meses;               
         }
+        
+       
+    
         
     }
 }

@@ -16,6 +16,7 @@ namespace angular_admin.Models
             
         }
         public DbSet<Cliente> Clientes {get; set;}
+        public DbSet< angular_admin.Models.JobSeeker> JobSeekers { get; set; }
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         

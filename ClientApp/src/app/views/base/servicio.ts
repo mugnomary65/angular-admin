@@ -20,4 +20,5 @@ export interface IServicio{
     tiosan: number;
     gastosNetos: number;
     ganancias: number;
+    precioReal: number;
 }

@@ -14,6 +14,7 @@ public double Manobra  {get; set;}
 
 public string Formapagos {get; set;}
 public double Seisporciento  {get; set;}
+public double PrecioReal  {get; set;}
 public double Subtotal  {get; set;}
 public double Tiosan  {get; set;}
 public double GastosNetos  {get; set;}

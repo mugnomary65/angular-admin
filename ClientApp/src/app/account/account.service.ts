@@ -14,7 +14,7 @@ export class AccountService {
   }
 
   login(userInfo: IUserInfo): Observable<any> { 
-    return this.http.post<any>("api/Account/Login", userInfo);
+    return this.http.post<any>("api/Auth/Login", userInfo);
   }
 
   obtenerToken(): string {

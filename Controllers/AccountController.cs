@@ -1,111 +1,56 @@
-
-using angular_admin.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
+using angular_admin.Helpers;
+using angular_admin.Models;
+using angular_admin.Auth;
+using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using System.Linq;
+using AutoMapper;
+
 
 namespace angular_admin.Controllers
 {
-    [Route("api/Account")]
-    [Produces("application/json")]
-    public class AccountController : Controller
+[Produces("application/json")]
+     [Route("api/[controller]")]
+  //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+   
+    
+    [ApiController]
+    public class AccountController: Controller
     {
+   private readonly ApplicationDbContext _appDbContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+        public AccountController(UserManager<ApplicationUser> userManager,IMapper mapper,ApplicationDbContext appDbContext)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
-            this._configuration = configuration;
+            _mapper = mapper;
+            _appDbContext=appDbContext;
         }
 
-        [Route("Create")]
+        // POST api/accounts
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] UserInfo model)
+        public async Task<IActionResult> Post([FromBody]UserInfo model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    return BuildToken(model);
-                }
-                else
-                {
-                    return BadRequest("Username or password invalid");
-                }
-            }
-            else
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-        }
+            var userIdentity=_mapper.Map<ApplicationUser>(model);
 
-        [HttpPost]
-        [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] UserInfo userInfo)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(userInfo.Email, userInfo.Password, isPersistent: false, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    return BuildToken(userInfo);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return BadRequest(ModelState);
-                }
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
+            var result = await _userManager.CreateAsync(userIdentity, model.Password);
 
-        private IActionResult BuildToken(UserInfo userInfo)
-        {
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+            if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Llave_super_secreta"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var expiration = DateTime.UtcNow.AddDays(7);
-
-            JwtSecurityToken token = new JwtSecurityToken(
-               issuer: "https://admin-vidal.azurewebsites.net/",
-               audience: "https://admin-vidal.azurewebsites.net/",
-               claims: claims,
-               expires: expiration,
-               signingCredentials: creds);
-
-            return Ok(new
-            {
-                token = new JwtSecurityTokenHandler().WriteToken(token),
-                expiration = expiration
-            });
-
+            await _appDbContext.JobSeekers.AddAsync(new JobSeeker{IdentityId=userIdentity.Id, Location=model.Location});
+            await _appDbContext.SaveChangesAsync();
+            
+            return new OkObjectResult("Account created");
         }
     }
-}
-    
+    }

@@ -207,7 +207,18 @@
           </div>             
         </div> 
       </div>   
-                     
+      <div class="form-group"> 
+        <div class="input-group col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Real Price</span>
+            </div>
+            <div class="input-group-append">
+              <input  [class.is-invalid]="touchedAndInvalid('precioReal')" type="number" id="precioReal" formControlName="precioReal" class="form-control" required>
+            </div> 
+           </div>
+        </div>
+      </div>           
             <div class="form-group">
               <div class="input-group col">
               <div class="input-group">

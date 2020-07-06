@@ -18,8 +18,8 @@ export class DashboardService {
  
 }
 
-getGastos(): Observable<number>{
-  return this.http.get<number>('api/Dashboard/gastosnetos'); 
+getTioSan(): Observable<number>{
+  return this.http.get<number>('api/Dashboard/tioSanDashb'); 
 
 }
 }

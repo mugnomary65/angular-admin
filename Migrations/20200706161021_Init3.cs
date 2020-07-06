@@ -28,7 +28,6 @@ namespace angular_admin.Migrations
                     Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
@@ -39,7 +38,9 @@ namespace angular_admin.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,6 +185,26 @@ namespace angular_admin.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "JobSeekers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdentityId = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobSeekers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobSeekers_AspNetUsers_IdentityId",
+                        column: x => x.IdentityId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Servicio",
                 columns: table => new
                 {
@@ -195,6 +216,7 @@ namespace angular_admin.Migrations
                     Manobra = table.Column<double>(nullable: false),
                     Formapagos = table.Column<string>(nullable: true),
                     Seisporciento = table.Column<double>(nullable: false),
+                    PrecioReal = table.Column<double>(nullable: false),
                     Subtotal = table.Column<double>(nullable: false),
                     Tiosan = table.Column<double>(nullable: false),
                     GastosNetos = table.Column<double>(nullable: false),
@@ -288,6 +310,11 @@ namespace angular_admin.Migrations
                 column: "ServicioId1");
 
             migrationBuilder.CreateIndex(
+                name: "IX_JobSeekers_IdentityId",
+                table: "JobSeekers",
+                column: "IdentityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Servicio_ClienteID",
                 table: "Servicio",
                 column: "ClienteID");
@@ -319,13 +346,16 @@ namespace angular_admin.Migrations
                 name: "Descripcion");
 
             migrationBuilder.DropTable(
+                name: "JobSeekers");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Servicio");
 
             migrationBuilder.DropTable(
-                name: "Servicio");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Clientes");

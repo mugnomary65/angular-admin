@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   clienteTotal: number  = 0;
   serviciosTotal: number  = 0;
   ganancias: number  = 0;
-  gastos: number  = 0;
+  tiosan: number  = 0;
   meses: number[] = [];
   constructor(private dashboardService: DashboardService, private gananciasService: GananciaService ) {
     
@@ -396,8 +396,8 @@ export class DashboardComponent implements OnInit {
     this.getTotalClientes();
     this.getGanancias();
     this.getTotalServicios();
-    this.getGastos();       
-    console.log(this.gastos);
+    this.getTioSan();       
+    console.log(this.tiosan);
    
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));
@@ -420,9 +420,9 @@ export class DashboardComponent implements OnInit {
     .subscribe(servicioData =>this.ganancias = servicioData);
     
   }
-  getGastos(): void{
-    this.dashboardService.getGastos()
-    .subscribe(servicioData =>this.gastos = servicioData);
+  getTioSan(): void{
+    this.dashboardService.getTioSan()
+    .subscribe(servicioData =>this.tiosan = servicioData);
     
   }
   

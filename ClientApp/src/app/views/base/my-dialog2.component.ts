@@ -78,6 +78,7 @@ formapagos: string = '';
         tiosan:[''],
         gastosNetos: [''],
         ganancias: [''],
+        precioReal: ['', Validators.required]
 
       });
         
@@ -144,6 +145,7 @@ formapagos: string = '';
       seisporciento: servicio.seisporciento,       
       subtotal: servicio.subtotal,
       tiosan: servicio.tiosan,
+      precioReal: servicio.precioReal
         
      });
     
