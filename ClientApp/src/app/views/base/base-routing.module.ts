@@ -16,6 +16,7 @@ import { GuardsGuard } from 'app/shared/guards.guard';
 import { AuthInterceptorService } from 'app/services/auth-interceptor.service';
 import { LogInterceptorService } from 'app/services/log-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
+import { ModalclienteComponent } from './modalcliente/modalcliente.component';
 
 const routes: Routes = [
   
@@ -42,6 +43,11 @@ const routes: Routes = [
       {
         path: 'editservice/:id',
         component: MyDialog2Component,
+      
+      },
+      {
+        path: 'modal',
+        component: ModalclienteComponent,
       
       },
    

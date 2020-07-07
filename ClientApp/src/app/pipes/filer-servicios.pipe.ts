@@ -12,7 +12,9 @@ export class FilerServiciosPipe implements PipeTransform {
     const resultPost = [];
     for(const post of value)
     {
-   if(post.clientes.address.toLowerCase().indexOf(args.toLowerCase()) > -1 )
+   if(post.clientes.address.toLowerCase().indexOf(args.toLowerCase()) > -1 || post.clientes.nombre.toLowerCase().indexOf(args.toLowerCase()) > -1
+   || post.estados.nombre.toLowerCase().indexOf(args.toLowerCase()) > -1
+   || post.date.toLowerCase().indexOf(args.toLowerCase()) > -1)
    {
      resultPost.push(post);
    };

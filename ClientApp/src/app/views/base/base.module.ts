@@ -59,6 +59,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { DashboardService } from 'app/service/dashboard.service';
 import { AccountService } from 'app/account/account.service';
 import { AuthGuardService } from 'app/services/auth-guard.service';
+import { ProductosService } from 'app/service/productos.service';
+import { ProductosComponent } from './productos/productos.component';
+import { ModalclienteComponent } from './modalcliente/modalcliente.component';
 
 @NgModule({
   imports: [
@@ -89,6 +92,9 @@ import { AuthGuardService } from 'app/services/auth-guard.service';
     MyDialog2Component,
     FilterPipe,
     FilerServiciosPipe,
+    ProductosComponent,
+    ModalclienteComponent
+    
    
 
 
@@ -97,8 +103,8 @@ import { AuthGuardService } from 'app/services/auth-guard.service';
   
 
   ], 
-  entryComponents:[ClienteComponent],
-  providers:[ClienteService,ServiceService,EstadoService, DescriptionService,AlertService, AccountService, AuthGuardService]
+  entryComponents:[ClienteComponent, ModalclienteComponent],
+  providers:[ProductosService ,ClienteService,ServiceService,EstadoService, DescriptionService,AlertService, AccountService, AuthGuardService]
  
 })
 export class BaseModule { }

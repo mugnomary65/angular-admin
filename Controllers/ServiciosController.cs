@@ -33,7 +33,7 @@ namespace angular_admin.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Servicio>>> GetServicio()
         {
-            var servicio = _context.Servicio.Include(x=> x.Clientes).Include(d => d.Estados).Include(x=> x.Descripcions).OrderByDescending(f => f.Date.Date).ToList();;
+            var servicio = _context.Servicio.Include(x=> x.Clientes).Include(d => d.Estados).Include(x=> x.Descripcions).OrderByDescending(f => f.Id).ToList();
 
             return servicio;
         }

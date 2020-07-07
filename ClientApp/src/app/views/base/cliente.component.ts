@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ICliente } from './cliente';
 import { DatePipe } from '@angular/common';
 import { element } from 'protractor';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     templateUrl: 'cliente.component.html',
@@ -19,7 +20,7 @@ export class ClienteComponent implements OnInit  {
  
   constructor(
     public fb: FormBuilder,private clientesService: ClienteService, private activatedRoute: ActivatedRoute,
-    private alertService: AlertService,  private router: Router
+    private alertService: AlertService,private dialog: MatDialog,  private router: Router
     ) 
      {
      this.miFormulario = this.fb.group({
@@ -32,7 +33,11 @@ export class ClienteComponent implements OnInit  {
    });
     }
     touchedAndInvalid = (controlName: string) => this.miFormulario.get(controlName).touched && this.miFormulario.get(controlName).invalid;
-  ngOnInit() {
+    openDialog(){
+      this.router.navigate(["/base/addservice"]);
+    }
+  
+    ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       if (params["id"] == undefined) {
         return;
@@ -88,11 +93,11 @@ export class ClienteComponent implements OnInit  {
       this.clientesService.createCliente(cliente)
    .subscribe(cliente => this.onSaveSuccess(), 
    error => this.alertService.error('Sorry an error occurred.'));
-   
+     
     }  
   }
   onSaveSuccess(){
-    this.router.navigate(["/base/listclients"]);
+    this.openDialog();
     
   }
   existenCambiosPendientes(): void {

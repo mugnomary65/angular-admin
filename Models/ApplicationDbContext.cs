@@ -39,6 +39,7 @@ namespace angular_admin.Models
     public DbSet<angular_admin.Models.Servicio> Servicio { get; set; }
     public DbSet<angular_admin.Models.Estado> Estado { get; set; }
     public DbSet<angular_admin.Models.Descripcion> Descripcion { get; set; }
+    public DbSet<angular_admin.Models.Productos> Productos { get; set; }
          
     }
 

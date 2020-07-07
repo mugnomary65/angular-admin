@@ -70,6 +70,7 @@ import { DecimalPipe } from './pipes/decimal.pipe';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GuardsGuard } from './shared/guards.guard';
 import { LogInterceptorService } from './services/log-interceptor.service';
+import { ProductosComponent } from './views/base/productos/productos.component';
 
 
 
@@ -115,6 +116,9 @@ PdfMakeWrapper.setFonts(pdfFonts);
     RegisterComponent,
 
     DecimalPipe,
+
+   
+ 
 
   ],
   

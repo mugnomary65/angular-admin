@@ -47,7 +47,7 @@ namespace angular_admin.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
-            return _context.Clientes.OrderByDescending(f => f.Date.Date).ToList();
+            return _context.Clientes.OrderByDescending(f => f.ClienteId).ToList();
                
         }
      
