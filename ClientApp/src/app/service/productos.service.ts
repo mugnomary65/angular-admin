@@ -13,6 +13,18 @@ export class ProductosService {
     return this.http.get<IProductos[]>('api/Productos'); 
   }
   getProducto(id: number):Observable<IProductos>{
-    return this.http.get<IProductos>('api/Producto/' + id);
+    return this.http.get<IProductos>('api/Productos/' + id);
   }
+  createProducto(producto: IProductos): Observable<IProductos> {
+    return this.http.post<IProductos>('api/Productos', producto);
+ }
+ delete(producto: IProductos): Observable<IProductos> {
+  return this.http.delete<IProductos>('api/Productos/' + producto.id);
+  
+} 
+
+updateProducto(producto: IProductos):Observable<IProductos> {  
+    return this.http.put<IProductos>('api/Productos/' + producto.id.toString(), producto);
+}
+
 }

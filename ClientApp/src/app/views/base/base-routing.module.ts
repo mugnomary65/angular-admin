@@ -17,6 +17,7 @@ import { AuthInterceptorService } from 'app/services/auth-interceptor.service';
 import { LogInterceptorService } from 'app/services/log-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { ModalclienteComponent } from './modalcliente/modalcliente.component';
+import { ProductosComponent } from './productos.component';
 
 const routes: Routes = [
   
@@ -46,8 +47,8 @@ const routes: Routes = [
       
       },
       {
-        path: 'modal',
-        component: ModalclienteComponent,
+        path: 'inventary',
+        component: ProductosComponent,
       
       },
    

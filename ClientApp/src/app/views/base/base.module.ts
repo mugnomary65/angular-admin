@@ -60,7 +60,7 @@ import { DashboardService } from 'app/service/dashboard.service';
 import { AccountService } from 'app/account/account.service';
 import { AuthGuardService } from 'app/services/auth-guard.service';
 import { ProductosService } from 'app/service/productos.service';
-import { ProductosComponent } from './productos/productos.component';
+import { ProductosComponent } from './productos.component';
 import { ModalclienteComponent } from './modalcliente/modalcliente.component';
 
 @NgModule({

@@ -26,8 +26,8 @@ export const navItems: INavData[] = [
         icon: 'icon-puzzle'
       },   
       {
-        name: 'Inventario',
-        url: '/base/inventario',
+        name: 'Inventory',
+        url: '/base/inventary',
         icon: 'icon-puzzle'
       },   
    

@@ -1,0 +1,103 @@
+<div class="animated fadeIn">
+    <app-alert></app-alert>
+    <div class="w3-row-padding">
+      <div class="col-sm-12"
+      background-color = "0480be">
+      <div class="card">
+        <!--<h4 class="modal-title w-100 font-weight-bold">Registro</h4>-->
+        <div class="card-header">
+        <h3> Inventory</h3>
+        </div>
+        <div class="card-body"> 
+
+       <form [formGroup] = "miFormulario" (ngSubmit)="save()">         
+        <div class= "row">
+        <div class="form-group">
+          <div class="input-group col">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Code</span>
+            </div>
+            <input  type="text" id="codigo" formControlName="codigo" class="form-control">
+             
+          </div>        
+        </div>
+        <div class="form-group">
+          <div class="input-group col">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Descripcion</span>
+            </div>
+            <input  type="text" id="descripcion" formControlName="descripcion" class="form-control">
+             
+          </div>        
+        </div>
+        <div class="form-group">
+          <div class="input-group col">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Entery</span>
+            </div>
+            <input  type="number" id="entrada" formControlName="entrada" class="form-control">
+             
+          </div>        
+        </div>
+        <div class="form-group">
+          <div class="input-group col">
+            <div class="input-group-prepend">
+              <span class="input-group-text">OutPut</span>
+            </div>
+            <input  type="number" id="salida" formControlName="salida" class="form-control">
+             
+          </div>        
+        </div>
+        <div class="form-group">
+          <div class="input-group col">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Residue</span>
+            </div>
+            <input  type="number" id="saldo" formControlName="saldo" class="form-control">
+             
+          </div>        
+        </div>
+        <div class="form-group">
+          <div class="input-group col">
+           
+            <button class="btn btn-info active"> Add inventory</button>
+             
+          </div>        
+        </div>
+      </div>
+      
+        </form>  
+     <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Descripcion</th>
+            <th>Entery</th>
+            <th>OutPut</th> 
+            <th>Residue</th>   
+            <th></th>      
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let producto of productos">
+            <td>{{producto.codigo}} </td>     
+            <td>{{producto.descripcion}}</td>  
+            <td>{{producto.entrada}}</td>   
+            <td>{{producto.salida}}</td>
+            <td>{{producto.saldo}}</td>   
+            <td>
+              <button class="btn btn-success" (click)="deleteProducto(producto)" > Delete</button>
+              
+            </td>
+        
+          </tr>
+        </tbody>
+      </table>
+
+  </div> 
+        </div>
+      </div> 
+  
+  
